@@ -59,7 +59,7 @@ abstract contract AllureHubTestBase is Test {
         if (creatorRegistry.isRegisteredCreator(creator)) return;
 
         vm.prank(creator);
-        creatorRegistry.registerCreator(creatorPayout, "ipfs://alurehub/creator/profile.json");
+        creatorRegistry.registerCreator(creatorPayout, "ipfs://allurehub/creator/profile.json");
     }
 
     function _createEthPlan() internal returns (uint256 planId) {

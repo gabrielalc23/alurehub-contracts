@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1.7
 
 ARG BASE_IMAGE=ubuntu:24.04
-ARG SOLC_IMAGE=ethereum/solc:0.8.34
 ARG OPENZEPPELIN_VERSION=v5.5.0
 ARG FORGE_STD_VERSION=v1.12.0
 ARG FOUNDRY_VERSION=v1.5.0
+ARG SOLC_VERSION=0.8.34
 
 FROM alpine/git:2.47.2 AS deps
 ARG OPENZEPPELIN_VERSION
@@ -13,7 +13,14 @@ WORKDIR /deps
 RUN git clone --depth 1 --branch "${OPENZEPPELIN_VERSION}" https://github.com/OpenZeppelin/openzeppelin-contracts.git openzeppelin-contracts \
     && git clone --depth 1 --branch "${FORGE_STD_VERSION}" https://github.com/foundry-rs/forge-std.git forge-std
 
-FROM ${SOLC_IMAGE} AS solc
+FROM ${BASE_IMAGE} AS solc
+ARG SOLC_VERSION
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends ca-certificates curl \
+    && rm -rf /var/lib/apt/lists/*
+RUN curl -L "https://github.com/ethereum/solidity/releases/download/v${SOLC_VERSION}/solc-static-linux" -o /usr/bin/solc \
+    && chmod +x /usr/bin/solc \
+    && /usr/bin/solc --version
 
 FROM ${BASE_IMAGE} AS app
 ARG FOUNDRY_VERSION

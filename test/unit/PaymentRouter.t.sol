@@ -62,7 +62,7 @@ contract PaymentRouterTest is AllureHubTestBase {
 
         vm.prank(badCreator);
         creatorRegistry.registerCreator(
-            address(failingReceiver), "ipfs://alurehub/creator/bad.json"
+            address(failingReceiver), "ipfs://allurehub/creator/bad.json"
         );
 
         vm.prank(badCreator);

@@ -135,31 +135,31 @@ No local Foundry or Solidity installation is required.
 ### Build the image
 
 ```bash
-docker build -t alurehub-contracts .
+docker build -t allurehub-contracts .
 ```
 
 ### Run formatting checks
 
 ```bash
-docker run --rm alurehub-contracts fmt --check
+docker run --rm allurehub-contracts fmt --check
 ```
 
 ### Build contracts
 
 ```bash
-docker run --rm alurehub-contracts build --sizes
+docker run --rm allurehub-contracts build --sizes
 ```
 
 ### Run tests
 
 ```bash
-docker run --rm alurehub-contracts test -vvv
+docker run --rm allurehub-contracts test -vvv
 ```
 
 ### Open a shell inside the image
 
 ```bash
-docker run --rm -it --entrypoint /bin/sh alurehub-contracts
+docker run --rm -it --entrypoint /bin/sh allurehub-contracts
 ```
 
 ## Native Workflow
@@ -218,4 +218,3 @@ The suite covers:
 - add event indexing via subgraph or custom indexer
 - add finance reconciliation and monitoring
 - formalize moderation and creator suspension workflows
-# alurehub-contracts

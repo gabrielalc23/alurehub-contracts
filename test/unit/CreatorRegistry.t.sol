@@ -8,13 +8,13 @@ import { AllureHubTestBase } from "test/utils/AllureHubTestBase.sol";
 contract CreatorRegistryTest is AllureHubTestBase {
     function test_RegisterCreatorStoresProfile() public {
         vm.prank(creator);
-        creatorRegistry.registerCreator(creatorPayout, "ipfs://alurehub/creator/profile.json");
+        creatorRegistry.registerCreator(creatorPayout, "ipfs://allurehub/creator/profile.json");
 
         Types.CreatorProfile memory profile = creatorRegistry.getCreator(creator);
 
         assertEq(profile.payoutAddress, creatorPayout);
         assertTrue(profile.active);
-        assertEq(profile.metadataURI, "ipfs://alurehub/creator/profile.json");
+        assertEq(profile.metadataURI, "ipfs://allurehub/creator/profile.json");
         assertGt(profile.createdAt, 0);
         assertEq(profile.updatedAt, profile.createdAt);
     }
@@ -33,7 +33,7 @@ contract CreatorRegistryTest is AllureHubTestBase {
 
         vm.prank(creator);
         vm.expectRevert(abi.encodeWithSelector(Errors.CreatorAlreadyRegistered.selector, creator));
-        creatorRegistry.registerCreator(creatorPayout, "ipfs://alurehub/creator/profile.json");
+        creatorRegistry.registerCreator(creatorPayout, "ipfs://allurehub/creator/profile.json");
     }
 
     function test_AdminCanDeactivateCreator() public {

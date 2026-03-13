@@ -22,13 +22,13 @@ jobs:
           persist-credentials: false
 
       - name: Build Docker image
-        run: docker build -t alurehub-contracts .
+        run: docker build -t allurehub-contracts .
 
       - name: Run Forge fmt
-        run: docker run --rm alurehub-contracts fmt --check
+        run: docker run --rm allurehub-contracts fmt --check
 
       - name: Run Forge build
-        run: docker run --rm alurehub-contracts build --sizes
+        run: docker run --rm allurehub-contracts build --sizes
 
       - name: Run Forge tests
-        run: docker run --rm alurehub-contracts test -vvv
+        run: docker run --rm allurehub-contracts test -vvv
