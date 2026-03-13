@@ -1,0 +1,34 @@
+name: CI
+
+permissions: {}
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  check:
+    name: Dockerized Foundry project
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Build Docker image
+        run: docker build -t alurehub-contracts .
+
+      - name: Run Forge fmt
+        run: docker run --rm alurehub-contracts fmt --check
+
+      - name: Run Forge build
+        run: docker run --rm alurehub-contracts build --sizes
+
+      - name: Run Forge tests
+        run: docker run --rm alurehub-contracts test -vvv
